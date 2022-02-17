@@ -40,6 +40,7 @@ module.exports = {
       .then(() => res.json({ message: "user and students deleted!" }))
       .catch((err) => res.status(500).json(err));
   },
+  //update a user's info
   updateUser(req, res) {
     user
       .findOneAndUpdate(
@@ -52,5 +53,20 @@ module.exports = {
           ? res.status(500).json({ message: "No user with this id!" })
           : res.json(user)
       );
+  },
+
+  //add a new friend to user
+  addFriend(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $addToSet: { friends: req.body } },
+      { runValidators: true, new: true }
+    )
+      .then((user) =>
+        !user
+          ? res.status(400).json({ message: "No User with this ID!" })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
   },
 };
