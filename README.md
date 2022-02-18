@@ -1,26 +1,3 @@
-# Social-Network-API
-
-A social network API using express for routing and MongoDB for the database
-
-{
-"userName": "footBall21",
-"email": "matt112@gmail.com"
-
-}
-
-{
-"thoughtText": "Hello World12212",
-"userName": "basketBall",
-"userId" : "620ff162bb1ad32aef6d03b0"
-
-}
-
-{
-"reactionBody": "Hello World12212",
-"userName": "basketBall"
-
-}
-
 # Project Title: Social Network API
 
 ![MIT-Tag](https://shields.io/badge/license-MIT-green)
@@ -52,7 +29,7 @@ To install this repository go to [MattpLawrence/Social-Media-API](https://github
 
 To use the application open the cloned repository in you text editor to use the integrated terminal. Or, open your terminal and navigate to the root directory of your location of the cloned repository. With Node.js installed type "node.js index.js" then hit "Enter" or "Return" on your keyboard. This will start the application. You will be presented with a series of prompts to fill out. Simply fill out all of the desired prompts to return the information from the database.
 
-View the walk through video here.: [Heroku](https://gamer-gabble.herokuapp.com/)
+View the walk through video here.: [Screen Cast](https://drive.google.com/file/d/18oW67EtRMA7apDnrn5toNUzIbAsts1hF/view)
 
 ## License: <a name="license"></a>
 
