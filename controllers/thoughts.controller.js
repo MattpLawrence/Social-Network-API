@@ -68,11 +68,11 @@ module.exports = {
       { $addToSet: { reactions: req.body } },
       { runValidators: true, new: true }
     )
-      .then((thought) =>
+      .then((thought) => {
         !thought
           ? res.status(404).json({ message: "No thought with that ID found." })
-          : res.json(thought)
-      )
+          : res.json(thought);
+      })
       .catch((err) => res.status(500).json(err));
   },
   // remove reaction from thought

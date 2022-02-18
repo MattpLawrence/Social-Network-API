@@ -11,7 +11,7 @@ A social network API using express for routing and MongoDB for the database
 {
 "thoughtText": "Hello World12212",
 "userName": "basketBall",
-"userId" : "620fb419f6f047909b6f19cb"
+"userId" : "620ff162bb1ad32aef6d03b0"
 
 }
 
