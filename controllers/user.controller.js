@@ -26,7 +26,21 @@ module.exports = {
       .then((user) => res.json(user))
       .catch((err) => {
         console.log(err);
-        return res.status(500).json(err);
+        if (err.keyPattern.email == 1) {
+          return res.status(403).json({
+            message:
+              "That Email has already been used, please enter a new email",
+            error: err,
+          });
+        } else if (err.keyPattern.userName == 1) {
+          return res.status(403).json({
+            message:
+              "That username has already been used, please enter a new username",
+            error: err,
+          });
+        } else {
+          return res.status(500).json(err);
+        }
       });
   },
   // Delete a user
@@ -35,31 +49,28 @@ module.exports = {
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user with that ID" })
-          : Student.deleteMany({ _id: { $in: user.students } })
+          : res.json({ message: "User deleted!" })
       )
-      .then(() => res.json({ message: "user and students deleted!" }))
       .catch((err) => res.status(500).json(err));
   },
   //update a user's info
   updateUser(req, res) {
-    user
-      .findOneAndUpdate(
-        { _id: req.params.userId },
-        { $set: req.body },
-        { runValidators: true, new: true }
-      )
-      .then((user) =>
-        !user
-          ? res.status(500).json({ message: "No user with this id!" })
-          : res.json(user)
-      );
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $set: req.body },
+      { runValidators: true, new: true }
+    ).then((user) =>
+      !user
+        ? res.status(500).json({ message: "No user with this id!" })
+        : res.json(user)
+    );
   },
 
   //add a new friend to user
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: { friends: req.body } },
+      { $addToSet: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
@@ -74,7 +85,7 @@ module.exports = {
   removeFriend(req, res) {
     User.findByIdAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friends: { friendId: req.params.friendId } } },
+      { $pull: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
